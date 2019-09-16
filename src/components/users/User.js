@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
 export class User extends Component {
-  componentDisMount() {
-    {console.log('run here')}
+  componentDidMount() {
+    console.log(this.props.match.params.login);
     this.props.getUser(this.props.match.params.login);
   }
 
@@ -11,7 +11,6 @@ export class User extends Component {
     */
     const {name} = this.props.user;
     const {loading} = this.props;
-    console.log('abasdfasdfasdf');
     return <div>{name}</div>;
   }
 }
