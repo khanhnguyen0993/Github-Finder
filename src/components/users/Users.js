@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import UserItem from './UserItem';
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
+
+import GithubContext from '../../context/github/githubContext';
 
 // destruct users and loading from props, so this.props.users -> users
-const Users = ({users, loading}) => {
+const Users = () => {
+  const githubContext = useContext(GithubContext);
+  const {loading, users, fetchUsers} = githubContext;
+
+  useEffect(() => {
+    fetchUsers();
+    // eslint-disable-next-line
+  }, [])
+
   if (loading) {
     return <Spinner />  
   } else {
@@ -16,11 +25,6 @@ const Users = ({users, loading}) => {
     </div>
     );
   }
-}
-
-Users.propTypes = {
-  users: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired
 }
 
 const userStyle = {
